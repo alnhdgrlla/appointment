@@ -4,24 +4,24 @@ class DoctorsController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+    @doctor = Doctor.find(params[:id])
   end
 
   def edit
-    @user = User.find(params[:id]) if current_user
+    @doctor = Doctor.find(params[:id])
   end
 
   def update
-  @user = User.find(params[:id])
-    if @user.update!(user_params)
-      redirect_to @user
+    @doctor = Doctor.find(params[:id])
+    if @doctor.update!(doctor_params)
+      redirect_to @doctor
     else
       render :edit
     end
   end
 
-  def user_params
-    params.require(:user).permit(:name, :bio)
+  def doctor_params
+    params.require(:user).permit(:name, :speciality)
   end
 
 end
