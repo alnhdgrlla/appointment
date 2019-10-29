@@ -10,33 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_25_014054) do
-
-  create_table "doctors", force: :cascade do |t|
-    t.string "name"
-    t.string "speciality"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.integer "examination_id"
-    t.index ["examination_id"], name: "index_doctors_on_examination_id"
-  end
+ActiveRecord::Schema.define(version: 2019_10_29_092621) do
 
   create_table "examinations", force: :cascade do |t|
-    t.string "doctor_id"
-    t.string "patient_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.datetime "date"
-  end
-
-  create_table "patients", force: :cascade do |t|
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.string "status"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.integer "user_id"
     t.string "name"
-    t.integer "examination_id"
-    t.index ["examination_id"], name: "index_patients_on_examination_id"
+    t.string "created_by"
+    t.string "doctor"
+    t.index ["user_id"], name: "index_examinations_on_user_id"
   end
 
-  add_foreign_key "doctors", "examinations"
-  add_foreign_key "patients", "examinations"
+  create_table "users", force: :cascade do |t|
+    t.string "email"
+    t.string "name"
+    t.string "password"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "password_digest"
+    t.boolean "admin", default: false
+  end
+
+  add_foreign_key "examinations", "users"
 end
