@@ -9,11 +9,13 @@ module Mutations
     def resolve(id:, data:)
       return GraphQL::ExecutionError.new("Forbidden action") if !context[:current_user].admin?
       doctor = User.find_by(id: id)
-      if !data[:doctor_id] 
-        doctor.update!(data.to_h)
-      else 
-        return GraphQL::ExecutionError.new("Update did not finish successfuly")
-      end
+        if doctor != context[:current_user]
+          return GraphQL::ExecutionError.new("Forbidden action")
+        elsif !data[:doctor_id] 
+          doctor.update!(data.to_h)
+        else 
+          return GraphQL::ExecutionError.new("Update did not finish successfuly")
+        end
       doctor
     end
   end
