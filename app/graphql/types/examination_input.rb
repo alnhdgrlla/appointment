@@ -3,5 +3,5 @@ class Types::ExaminationInput < Types::BaseInputObject
   argument :name, String, required: false
   argument :start_time, Types::DateTimeType, required: false
   argument :end_time, Types::DateTimeType, required: false
-  # argument :doctor, Types::UserType, required: true
+  argument :doctor_id, ID, required: false
 end

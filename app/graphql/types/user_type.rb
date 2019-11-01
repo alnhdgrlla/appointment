@@ -4,5 +4,4 @@ class Types::UserType < Types::BaseObject
   field :email, String, null: false
   field :password, String, null: false
   field :admin, Boolean, null:true
-  field :doctor, String, null:true
 end
