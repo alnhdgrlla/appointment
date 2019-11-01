@@ -4,4 +4,5 @@ class Types::MutationType < Types::BaseObject
   field :create_examination, mutation: Mutations::CreateExamination
   field :delete_examination, mutation: Mutations::DeleteExamination
   field :update_examination, mutation: Mutations::UpdateExamination
+  field :update_doctor, mutation: Mutations::UpdateDoctor
 end
